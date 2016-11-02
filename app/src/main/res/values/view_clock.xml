@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Colck">
+        <!--表盘的边距-->
+        <attr name="wb_padding" format="dimension" />
+        <!--文字的大小-->
+        <attr name="wb_text_size" format="dimension" />
+        <!-- 时针,分针,秒针的宽度-->
+        <attr name="wb_hour_pointer_width" format="dimension" />
+        <attr name="wb_minute_pointer_width" format="dimension"/>
+        <attr name="wb_second_pointer_width" format="dimension"/>
+        <!-- 指针的圆角值-->
+        <attr name="wb_pointer_corner_radius" format="dimension" />
+        <!-- 指针超过中心点的距离-->
+        <attr name="wb_pointer_end_length" format="dimension" />
+        <!-- 时刻刻度的颜色 和 非时刻刻度的颜色 -->
+        <attr name="wb_scale_long_color" format="color" />
+        <attr name="wb_scale_short_color" format="color" />
+        <!-- 时针,分针,秒针的颜色-->
+        <attr name="wb_hour_pointer_color" format="color" />
+        <attr name="wb_minute_pointer_color" format="color" />
+        <attr name="wb_second_pointer_color" format="color" />
+
+    </declare-styleable>
+
+
+</resources>
