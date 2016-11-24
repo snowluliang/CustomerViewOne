@@ -1,4 +1,6 @@
 # CustomerViewOne
-一个不完美的表盘
 
 ![](https://github.com/snowluliang/gitskills/blob/master/2.jpg)
+
+![](https://github.com/snowluliang/repository/blob/master/33.gif)
+- 有待改进
