@@ -15,9 +15,7 @@ import java.util.Calendar;
 
 import static com.snow.customerviewone.R.styleable.View;
 
-/**
- * Created by snow on 2016/11/1.
- */
+
 
 public class Colck extends View {
 
@@ -142,7 +140,7 @@ public class Colck extends View {
     }
 
     class NoDetermineSizeException extends Exception {
-        public NoDetermineSizeException(String message) {
+        private NoDetermineSizeException(String message) {
             super(message);
         }
     }
@@ -176,7 +174,7 @@ public class Colck extends View {
                 width = Math.min(heightSize, width);
             }
         }
-        setMeasuredDimension(width,width);
+        setMeasuredDimension(width, width);
     }
 
     //表盘圆的半径值与 尾部长度值
@@ -184,7 +182,7 @@ public class Colck extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mRadius = (Math.min(w, h) - mPadding) / 2;
-        mPointEndLength = mRadius / 6;//指针尾部的长度默认为 半径的六分之一;
+        mPointEndLength = mRadius / 7;//指针尾部的长度默认为 半径的六分之一;
     }
 
     @Override
@@ -194,7 +192,7 @@ public class Colck extends View {
         paintCircle(canvas);//外圆背景
         paintScale(canvas);//绘制刻度
         //绘制指针
-       // paintPointer(canvas);
+        paintPointer(canvas);
        // TODO   暂时有缺陷
 
         canvas.restore();
@@ -249,24 +247,31 @@ public class Colck extends View {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
+        System.out.println("***************");
+        System.out.println("hour:"+hour+"--minute:"+minute+"--second"+second);
         //时针,分针,秒针旋转的角度
         int roHour = (hour % 12) * 360 / 12;
         int roMinute = minute * 360 / 60;
         int roSecond = second * 360 / 60;
+        System.out.println("***************");
+        System.out.println("hour:"+roHour+"--minute:"+roMinute+"--second"+roSecond);
         //时针
         canvas.save();
-        canvas.rotate(roHour);
+        canvas.rotate(roHour+minute/2,getWidth() / 2, getHeight() / 2);
         RectF rectFHour = new RectF(-mHourPointerWidth / 2, -mRadius * 3 / 5,
                 mHourPointerWidth / 2, mPointEndLength);
 
         mPaint.setColor(mHourPointerColor);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(mHourPointerWidth);
+        canvas.translate(getWidth() / 2, getHeight() / 2);
+        //canvas.drawRoundRect(rectFHour,mPointRadius,mPointRadius,mPaint);
         canvas.drawRoundRect(rectFHour,mPointRadius,mPointRadius,mPaint);
         canvas.restore();
         //分针
         canvas.save();
-        canvas.rotate(roMinute);
+        canvas.rotate(roMinute,getWidth()/2,getHeight()/2);
+        canvas.translate(getWidth() / 2, getHeight() / 2);
         RectF rectFMinute = new RectF(-mMintuePointerWidth / 2, -mRadius * 3.5f / 5,
                 mMintuePointerWidth / 2, mPointEndLength);
         mPaint.setColor(mMinutePointerColor);
@@ -275,7 +280,8 @@ public class Colck extends View {
         canvas.restore();
         //秒针
         canvas.save();
-        canvas.rotate(roSecond);
+        canvas.rotate(roSecond,getWidth() / 2, getHeight() / 2);
+        canvas.translate(getWidth() / 2, getHeight() / 2);
         RectF rectFSecond = new RectF(-mSecondPointerWidth / 2, -mRadius + 15,
                 mSecondPointerWidth / 2, mPointEndLength);
         mPaint.setColor(mSecondPointerColor);
@@ -285,7 +291,8 @@ public class Colck extends View {
         //中心
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(mSecondPointerColor);
-        canvas.drawCircle(0, 0, mSecondPointerWidth * 4, mPaint);
+        //canvas.drawCircle(0, 0, mSecondPointerWidth * 4, mPaint);
+        canvas.drawCircle(getWidth()/2, getHeight()/2, mSecondPointerWidth * 4, mPaint);
 
     }
 }
